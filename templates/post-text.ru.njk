@@ -1,0 +1,9 @@
+<title>{{ page_title }}</title>
+
+
+  {% for feature in features %}
+    <div class="module">
+      <h3>{{ feature.name }}</h3>
+      <p>{{ feature.description }}</p>
+    </div>
+  {% endfor %}
