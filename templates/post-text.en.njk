@@ -1,0 +1,25 @@
+<img alt="Ukraine Hryvna UAH exchange rates on {{ dateLoc }}" src="{{ imgsrc }}">
+<p>National bank of Ukraine (NBU) on {{ dateloc }} sets the official hryvnia exchange rate against foreign currencies:</p>
+
+{% for feature in features %}{% if feature.code=='UAH/USD' or feature.code=='UAH/EUR' or feature.code=='UAH/GBP'
+or feature.code=='UAH/RUB' %}<p>{{ feature.code }} ({{ feature.currency }}) {{ feature.rate }}</p> {% endif %}{% endfor %}
+
+<table class="table-finance">
+<thead>
+<tr>
+<th>Code</th>
+<th>Amount</th>
+<th>Rate</th>
+<th class="mob_hidden">Date</th>
+<th class="mob_desksm_hidden">Currency</th>
+</tr>
+</thead>
+<tbody>
+{% for feature in features %}
+<tr>
+<td>{{ feature.code }}</td><td>{{ feature.amount|default('1')}}</td><td>{{ feature.rate }}</td>
+<td class="mob_hidden">{{ dateloc2 }}</td><td class="mob_desksm_hidden">{{ feature.currency | upper }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>

@@ -1,9 +1,26 @@
-<title>{{ page_title }}</title>
+<img alt="Курсы Гривни (UAH) на {{ dateloc }}" src="{{ imgsrc }}">
+<p>Национальный Банк Украины состоянием на {{ dateloc }} установил следующие курсы Гривни (UAH) по отношению к основным мировым валютам:</p>
 
+{% for feature in features %}{% if feature.code=='UAH/USD' or feature.code=='UAH/EUR' or feature.code=='UAH/GBP'
+or feature.code=='UAH/RUB' %}<p>{{ feature.code }} ({{ feature.currency }}) {{ feature.rate }}</p> {% endif %}{% endfor %}
 
-  {% for feature in features %}
-    <div class="module">
-      <h3>{{ feature.name }}</h3>
-      <p>{{ feature.description }}</p>
-    </div>
-  {% endfor %}
+<table class="table-finance">
+<thead>
+<tr>
+<th>Код</th>
+<th>Единицы</th>
+<th>Курс</th>
+<th class="mob_hidden">Дата</th>
+<th class="mob_desksm_hidden">Название</th>
+</tr>
+</thead>
+<tbody>
+{% for feature in features %}
+<tr>
+<td>{{ feature.code }}</td><td>{{ feature.amount|default('1')}}</td><td>{{ feature.rate }}</td>
+<td class="mob_hidden">{{ dateloc2 }}</td><td class="mob_desksm_hidden">{{ feature.currency | upper }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<p>Эксперты БиБаБо (Bbabo.net) всегда в курсе последних изменений на валютном рынке</p>
