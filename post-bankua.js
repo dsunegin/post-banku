@@ -7,9 +7,8 @@ const fs = require('fs').promises;
 const path = require('path');
 const format = require('date-fns/format');
 
-//const WEBSITE_ROOT_PATH = "D:/Img/var/www/html-bublbe";
-const WEBSITE_ROOT_PATH = "/var/www/html-bublbe";
-const DEFAULT_IMG_PATH = "/images/www/person/bolie/";
+const WEBSITE_ROOT_PATH = process.env.WEBSITE_ROOT_PATH;
+const DEFAULT_IMG_PATH = process.env.DEFAULT_IMG_PATH;
 const Categories = [
     {langDB: 'uk-UA', category: 103, datefnLocale: 'uk'},
     {langDB: 'ru-RU', category: 88, datefnLocale: 'ru'},
@@ -49,7 +48,7 @@ try {
         const lang = lang_DB.split('-')[0];
         const Locale = require('date-fns/locale/' + icat.datefnLocale);
 
-        let PostImgSrc = await getRandomImage(WEBSITE_ROOT_PATH + DEFAULT_IMG_PATH);
+        let PostImgSrc = await getRandomImage(DEFAULT_IMG_PATH);
         PostImgSrc = PostImgSrc.replace(WEBSITE_ROOT_PATH,"");
 
 
