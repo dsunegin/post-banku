@@ -63,19 +63,13 @@ node post-bankua.js
 ### Start the pm2 cron for Today rates
 
 ```bash
-./pm2-bankua-today.sh
+./pm2-post-bankua.sh
 ```
 By default, cron runs every day at 8:00 a.m. 
 
-You can adjust it in  `pm2-post-bankua-today.sh` file.
+You can adjust it in  `pm2-post-bankua.sh` file.
  
-**Notice:** You must have installed pm2 process manager to run pm2-bankua.sh script.
-
-### Start the pm2 cron for Tomorrow rates
-
-```bash
-./pm2-post-bankua-today.sh
-```
+**Notice:** You must have installed pm2 process manager to run pm2-post-bankua.sh script.
  
 
 ## Contact
