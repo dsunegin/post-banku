@@ -8,7 +8,9 @@ const path = require('path');
 const format = require('date-fns/format');
 
 const WEBSITE_ROOT_PATH = process.env.WEBSITE_ROOT_PATH;
-const DEFAULT_IMG_PATH = process.env.DEFAULT_IMG_PATH;
+const PERSON_PATH = process.env.PERSON_PATH;
+const person = process.env.PERSON.split('|');
+
 const Categories = [
     {langDB: 'uk-UA', category: 103, datefnLocale: 'uk'},
     {langDB: 'ru-RU', category: 88, datefnLocale: 'ru'},
@@ -17,6 +19,8 @@ const Categories = [
 ]
 
 if (envconf.error) {   throw envconf.error};        // ERROR if Config .env file is missing
+
+const sortRandom = (arr) => arr.sort(() => Math.random() - 0.5);
 
 const connectionFinance = mysql.createConnection({
     host: process.env.DB_FINHOST,
@@ -48,7 +52,9 @@ try {
         const lang = lang_DB.split('-')[0];
         const Locale = require('date-fns/locale/' + icat.datefnLocale);
 
-        let PostImgSrc = await getRandomImage(DEFAULT_IMG_PATH);
+        let pesonRand = sortRandom(person)[0];
+        const PersonImgPath = path.resolve(PERSON_PATH, pesonRand);
+        let PostImgSrc = await getRandomImage(PersonImgPath);
         PostImgSrc = PostImgSrc.replace(WEBSITE_ROOT_PATH,"");
 
 
@@ -60,7 +66,7 @@ try {
         const features = result[0];
         const featuresExt = await Promise.all(features.map(async currencyObj => {
             let currCodeArr = currencyObj.code.split('/');
-            const code = currCodeArr[1];
+            const code = currCodeArr[0];
             const sql = `SELECT * FROM currency WHERE code='${code}' AND lang='${lang}' LIMIT 1`;
             await connectionFinance.query(sql).then(result => {
                 let currName = (result[0][0] != null) ? result[0][0].currency : '';
@@ -126,8 +132,8 @@ async function getRandomImage (dirPath){
 
     // Create a list of files to read.
     const filesToRead = fileNames.map(fileName =>
-        //path.resolve(dirPath, fileName)
-        dirPath+fileName
+        path.resolve(dirPath, fileName)
+        //dirPath+fileName
     );
     let randFnum = getRandomIntInclusive(0,filesToRead.length-1);
     return filesToRead[randFnum];

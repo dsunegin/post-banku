@@ -45,7 +45,8 @@ DB_PRESSPASSWORD="psw_press_user"   - UserPassword
 
 PATH_TEMPLATES = './templates'      - template path
 WEBSITE_ROOT_PATH = "/var/www/html-website"                                 - website root path
-DEFAULT_IMG_PATH = "/var/www/html-website/images/www/person/bolie/"         - absolute path to random image
+PERSON_PATH_PATH = "/var/www/html-website/images/www/person"         - absolute path to random directory
+PERSON = "bolie|bolie-others|georgy-bolie-red|georgy-bolie-s"        - list of random DIR 
 
 ```
 
