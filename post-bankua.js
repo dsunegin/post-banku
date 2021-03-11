@@ -2,6 +2,7 @@ const mysql = require("mysql2");
 const slugify = require('slugify');
 const { crc16 } = require('crc');
 const envconf = require('dotenv').config();
+const cron = require('node-cron');
 let nunjucks = require('nunjucks');
 const fs = require('fs').promises;
 const path = require('path');
@@ -101,11 +102,15 @@ try {
 
 }
 
-main()
-.then(created =>
-    console.log(created)
-)
-.catch(err => console.error(err));
+if (process.env.CRON) {
+    cron.schedule(process.env.CRON, () =>  {main().then().catch(err => console.error(err));}, { scheduled: true});
+} else {
+    main()
+    .then(created =>
+        console.log(created)
+    )
+    .catch(err => console.error(err));
+};
 /**
  * getFiles returns a list of all files in a directory path {dirPath}
  * that match a given file extension {fileExt} (optional).

@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Start at 8:05 am
+# Start at 8:00 am
 
 pm2 delete post-bankua
-pm2 start post-bankua.js --name post-bankua --cron "5 11 * * *"
+CRON="00 08 * * *" pm2 start post-bankua.js --name post-bankua
 pm2 save
