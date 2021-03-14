@@ -1,5 +1,5 @@
 <img alt="Офіційний курс гривні на {{ dateLoc }} " src="{{ imgsrc }}">
-<p>Національним Банком України (НБУ) {{ dateloc }} встановлено наступний курс гривні UAH до відповідних іноземних валют:</p>
+<p>Національним Банком України (НБУ) на {{ dateloc }} встановлено наступний курс гривні UAH до відповідних іноземних валют:</p>
 
 {% for feature in features %}{% if feature.code=='USD/UAH' or feature.code=='EUR/UAH' or feature.code=='GBP/UAH'
 or feature.code=='RUB/UAH' %}<p>{{ feature.code }} ({{ feature.currency }}) {{ feature.rate }}</p> {% endif %}{% endfor %}
